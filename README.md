@@ -8,11 +8,11 @@ npm i discord-clicking-game
 - You need to use Node JS V-16.x for this module.
 
 # What ?
-This is an module to create a clickling game, Now you might be thinking what is this so go to the bottom to see the images.
+This is an module to create a click speed game, Not that accurate cause it takes time to get interaction, Now you might be thinking what is this so go to the bottom to see the images.
 
 # How ?
 ```js
-const click = require('discord-clicking-game');
+const click = require('discord-click-speed');
 const game = new click();
 
 /** Solo Mode
@@ -35,16 +35,16 @@ game.party(message)
 
 # Images
 - ## Game During Getting Ready
-![ready.png](https://cdn.discordapp.com/attachments/880732844220100608/883606393943359518/unknown.png)
+![ready.png](https://cdn.discordapp.com/attachments/880732844220100608/884046746467053568/unknown.png)
 
 - ## Game Started
-![started.png](https://cdn.discordapp.com/attachments/880732844220100608/883606218004905994/unknown.png)
+![started.png](https://cdn.discordapp.com/attachments/880732844220100608/884046558046347324/unknown.png)
 
-- ## Game Lost
-![lost.png](https://cdn.discordapp.com/attachments/880732844220100608/883606265933221888/unknown.png)
+- ## Game Failed
+![lost.png](https://cdn.discordapp.com/attachments/880732844220100608/884046826439868466/unknown.png)
 
-- ## Game Won
-![won.png](https://cdn.discordapp.com/attachments/880732844220100608/883606311265251368/unknown.png)
+- ## Game End
+![won.png](https://cdn.discordapp.com/attachments/880732844220100608/884046320329982012/unknown.png)
 
 # Customizations
 ```js
@@ -53,10 +53,10 @@ const game = new click("🎈",// Emoji to use on correct button
     2000 || "random", // Time in which game starts after the ready message
     3000, // Time in which game auto ends , NOTE time should be in Milleseconds
     {
-        win: "{winner} won in {time}", // winning messages
-        loose: "You nerds are slowowowoow", // Game end message when no one clicks
-        started: "Game is started click fast", // Game started message
-        ready: "Get your toes in positon cause game is gonna start soon", // Ready message
+        end = "The clicking game is ended results are shown below";
+        ready = "get ready for clicking festival 🎭";
+        started = "Click The DANG Buttons FAST";
+        fail = "You guys were too slow too click"
     }
 );
 ```
