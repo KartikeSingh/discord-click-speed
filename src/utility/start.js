@@ -1,5 +1,4 @@
 const { User, MessageActionRow, MessageButton, Message } = require("discord.js");
-const ms = require('ms');
 
 /**
  * Module to Start the game
@@ -13,22 +12,27 @@ module.exports = async function start(message, player2, party) {
 
     await new Promise((resolve) => setTimeout(resolve, this.startTime === "random" ? Math.floor(Math.random() * 1500 + 2500) : this.startTime));
 
-    const filter = party ? (i) => i.message.id === msg.id && !i.user.bot : (i) => i.message.id === msg.id && (i.user.id === message.author.id || i.user.id === player2?.id), data = {};
+    const filter = party ? (i) => i.message.id === msg.id && !i.user.bot : (i) => i.message.id === msg.id && (i.user.id === message.author.id || i.user.id === player2?.id), data = new Map();
 
     msg.edit({ embeds: [{ color: "GREYPLE", title: this.started }], components: rows });
 
     const collector = message.channel.createMessageComponentCollector({ filter: filter, time: this.endTime, message: msg });
 
-    collector.on('collect', (interaction) => data[interaction.user.username] ? data[interaction.user.username]++ : data[interaction.user.username] = 1);
+    collector.on('collect', (interaction) => {
+        data.has(interaction.user.id) ? data.set(interaction.user.id, { value: data.get(interaction.user.id).value + 1, name: interaction.user.username }) : data.set(interaction.user.id, { value: 1, name: interaction.user.username })
+        interaction.reply({ ephemeral: true, content: `Click number : ${data.get(interaction.user.id).value}` });
+    });
 
     collector.on('end', () => {
-        let content = "";
-        Object.keys(data).forEach((v, i) => {
-            content += `${i + 1}**${v}** : ${Object.values(data)[i]}\t${Object.values(data)[i] / (this.endTime / 1000)}\n`;
-        })
+        let content = "", index = 1;
+
+        data.forEach((v) => {
+            content += `${index}.${v.name} : ${v.value}\t-\t\u200b${v.value / (this.endTime / 1000)}CPS\n`;
+            index++;
+        });
 
         if (content.length === 0) content = this.fail;
-        else content = `Username\tClicks\tCPS\n\n`;
+        else content = `\`\`\`Username\t\t\tClicks\t-\tCPS\n\n${content}\`\`\``;
 
         msg.edit({ components: [], embeds: [{ color: "GREEN", title: this.end, description: content }] })
     })

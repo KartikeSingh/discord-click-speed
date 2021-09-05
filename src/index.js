@@ -14,13 +14,14 @@ class clickingGame {
      * @param {String} messages.ready The message to show while getting ready.
      * @param {String} messages.started The message to show when game is started.
      */
-    constructor(emoji, startTime = "random", endTime = 3000, messages) {
+    constructor(emoji = "🥅", startTime = "random", endTime = 10000, messages) {
         if (typeof (emoji) !== "string" || emoji.length === 0) throw new Error("Invalid emoji was provided");
         if (typeof (endTime) !== "number" || endTime < 1000) throw new Error("Invalid endTime was provided. Note endTime should be in milliseconds and at least 1000 i.e. 1 second");
 
+        this.emoji = emoji;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.end = messages?.win || "The clicking game is ended results are shown below";
+        this.end = messages?.end || "The clicking game is ended results are shown below";
         this.ready = messages?.ready || "get ready for clicking festival 🎭";
         this.started = messages?.started || "Click The DANG Buttons FAST";
         this.fail = messages?.fail || "You guys were too slow too click"
