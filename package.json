@@ -1,0 +1,31 @@
+{
+  "name": "discord-click-speed",
+  "version": "0.0.1",
+  "description": "An module with which you can make a clicking game for discord.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KartikeSingh/discord-click-speed.git"
+  },
+  "keywords": [
+    "discord",
+    "games",
+    "discord-games",
+    "click",
+    "speed"
+  ],
+  "author": "shisui",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KartikeSingh/discord-click-speed/issues"
+  },
+  "homepage": "https://github.com/KartikeSingh/discord-click-speed#readme",
+  "dependencies": {
+    "discord.js": "^13.1.0",
+    "ms": "^2.1.3"
+  },
+  "devDependencies": {}
+}
